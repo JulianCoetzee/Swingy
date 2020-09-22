@@ -18,13 +18,13 @@ public class App {
         if (args.length != 1 || (!args[0].equals("console") && !args[0].equals("gui"))) {
             System.out.println("Usage: program console | gui");
             System.exit(1);
+        }
 
-            if (args[0].equals("gui"))
-                new GuiStart().run();
-            // else if (args[0].equals("console"))
+        if (args[0].equals("gui"))
+            new GuiStart().run();
+        // else if (args[0].equals("console"))
             //     new ConsoleStart().run();
         }
-    }
 
     public static JFrame getFrame() {
         if (frame == null) {
