@@ -1,6 +1,7 @@
 package jules.rpg.gui;
 
 import jules.rpg.App;
+import jules.rpg.control.StartControl;
 import jules.rpg.gui.view.ViewStart;
 
 import java.awt.*;
@@ -11,59 +12,80 @@ public class GuiStart extends JPanel implements ViewStart {
 
     private static final long serialVersionUID = 1L;
     
-    private GridLayout glo;
+    private GridBagLayout gbl;
+    private GridBagConstraints gbc;
     private JButton newGameButt;
     private JButton selectGameButt;
     private JButton kwit;
 
+    private StartControl control;
+
+    @Override
     public void run() {
+        control = new StartControl(this);
         guiMake();
     }
 
     private void guiMake() {
 
-        glo = new GridLayout(3, 0);
+        gbl = new GridBagLayout();
+        gbc =new GridBagConstraints();
         newGameButt = new JButton("New Game");
         selectGameButt = new JButton("Continue");
         kwit = new JButton("Exit");
 
         App.getFrame().setTitle("Start");
-        this.setLayout(glo);
+        this.setLayout(gbl);
         this.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
-        newGameButt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newGameButt.setText("This works!");
-            }
-        });
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-        selectGameButt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectGameButt.setText("This works!");
-            }
-        });
-
-        kwit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        this.add(newGameButt, glo);
-        this.add(selectGameButt, glo);
-        this.add(kwit, glo);
+        this.add(newGameButt, gbc);
+        this.add(selectGameButt, gbc);
+        this.add(kwit, gbc);
 
         this.setVisible(true);
         App.getFrame().setContentPane(this);
         App.getFrame().revalidate();
         App.showFrame();
 
+        newGameButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.onClickNewGame();
+            }
+        });
 
+        selectGameButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.onClickContinue();
+            }
+        });
 
+        kwit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.onClickKwit();
+            }
+        });
+    }
+    
+    @Override
+    public void newGame() {
+        newGameButt.setText("This works!");
     }
 
+    @Override
+    public void loadGame() {
+        selectGameButt.setText("This works!");
+    }
+
+    @Override
+    public void kwit() {
+        System.exit(1);
+    }
     
 }

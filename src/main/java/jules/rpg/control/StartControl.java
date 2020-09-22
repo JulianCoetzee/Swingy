@@ -10,5 +10,15 @@ public class StartControl {
         this.view = view;
     }
 
+    public void onClickNewGame() {
+        view.newGame();
+    }
     
+    public void onClickContinue() {
+        view.loadGame();
+    }
+
+    public void onClickKwit() {
+        view.kwit();
+    }
 }
