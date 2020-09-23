@@ -19,7 +19,7 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
     private JPanel classPanel;
     private JEditorPane classInfo;
     private JLabel charLabel;
-    private JLabel classLabel;
+    private JLabel forgeLabel;
     private JTextField charField;
     private JButton warButt;
     private JButton rangeButt;
@@ -42,13 +42,13 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
         charPanel = new JPanel();
         classPanel = new JPanel();
         classInfo = new JEditorPane();
+        forgeLabel = new JLabel("FORGE YOUR HERO\n");
         charLabel = new JLabel("Name: ");
-        classLabel = new JLabel("Classes: ");
         charField = new JTextField(10);
         warButt = new JButton("Forge Warrior");
         rangeButt = new JButton("Forge Ranger");
         rogueButt = new JButton("Forge Rogue");
-        backButt = new JButton("Forge Rogue");
+        backButt = new JButton("Back");
 
         App.getFrame().setTitle("Forge");
         this.setLayout(gbl);
@@ -58,16 +58,16 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
 
+        charPanel.add(forgeLabel);
         charPanel.add(charLabel);
         charPanel.add(charField);
         charPanel.setVisible(true);
         this.add(charPanel, gbc);
 
-        classPanel.add(classLabel);
         classInfo.setEditable(false);
         classInfo.setFont(new Font("monospaced", Font.PLAIN, 12));
         classInfo.setText(
-            "Class  Attack  Defense   HP\n" +
+            "Class      Attack  Defense HP\n" +
             "Warrior    20      30      120\n" +
             "Ranger     30      20      100\n" +
             "Rogue      30      30      80\n");
