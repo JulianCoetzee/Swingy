@@ -7,19 +7,17 @@ import jules.rpg.view.ViewContinue;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-
 import java.io.*;
+import java.util.*;
 
-public class GuiContinue extends JPanel implements ViewContinue, ListSelectionListener {
+public class GuiContinue extends JPanel implements ViewContinue {
 
     private static final long serialVersionUID = 1L;
 
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
-    private DefaultListModel charList;
-    private JList charSelect;
-    private JScrollPane charFiles;
+    private JComboBox<String> charSelect;
+    private ArrayList<String> charList;
     private File[] charFolder;
     private JPanel titlePanel;
     private JPanel charPanel;
@@ -43,8 +41,8 @@ public class GuiContinue extends JPanel implements ViewContinue, ListSelectionLi
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        charList = new DefaultListModel<String>();
         charFolder = new File("../charfiles").listFiles();
+        charList = new ArrayList<String>();
         titlePanel = new JPanel();
         charPanel = new JPanel();
         loadLabel = new JLabel("LOAD CHARACTER\n");
@@ -67,16 +65,13 @@ public class GuiContinue extends JPanel implements ViewContinue, ListSelectionLi
         while (i < charFolder.length)
         {
             if (charFolder[i].isFile())
-                charList.addElement(charFolder[i].getName());
+                charList.add(charFolder[i].getName());
             i++;
         }
-        charSelect = new JList<String>(charList);
-        charSelect.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        charSelect = new JComboBox<String>();
+        charSelect.setModel(new DefaultComboBoxModel<String>(charList.toArray(new String[0])));
         charSelect.setSelectedIndex(0);
-        charSelect.addListSelectionListener(this);
-        charSelect.setVisibleRowCount(5);
-        charFiles = new JScrollPane(charSelect);
-        charPanel.add(charFiles);
+        charPanel.add(charSelect);
         charPanel.add(loadButt);
         charPanel.add(delButt);
         charPanel.setVisible(true);
@@ -88,36 +83,17 @@ public class GuiContinue extends JPanel implements ViewContinue, ListSelectionLi
         App.getFrame().revalidate();
         App.showFrame();
 
-        // charSelect.addListSelectionListener(new ListSelectionListener() {
-        //     @Override
-        //     public void valueChanged(ListSelectionEvent e) {
-        //         if (e.getValueIsAdjusting() == false)
-        //         {
-        //             if (charSelect.getSelectedIndex() == -1)
-        //             {
-        //                 loadButt.setEnabled(false);
-        //                 delButt.setEnabled(false);
-        //             }
-        //             else
-        //             {
-        //                 loadButt.setEnabled(true);
-        //                 delButt.setEnabled(true);
-        //             }
-        //         }
-        //     }
-        // });
-
         loadButt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                control.onClickLoad(charSelect.getSelectedValue().toString());
+                control.onClickLoad(charSelect.getSelectedItem().toString());
             }
         });
 
         delButt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                control.onClickDel(charSelect.getSelectedValue().toString());
+                control.onClickDel(charSelect.getSelectedItem().toString());
             }
         });
 
@@ -128,22 +104,6 @@ public class GuiContinue extends JPanel implements ViewContinue, ListSelectionLi
             }
 
         });
-    }
-
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false)
-        {
-            if (charSelect.getSelectedIndex() == -1)
-            {
-                loadButt.setEnabled(false);
-                delButt.setEnabled(false);
-            }
-            else
-            {
-                loadButt.setEnabled(true);
-                delButt.setEnabled(true);
-            }
-        }
     }
 
     @Override
