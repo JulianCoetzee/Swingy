@@ -41,7 +41,8 @@ public class GuiContinue extends JPanel implements ViewContinue {
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        charFolder = new File("../charfiles").listFiles();
+        charFolder = new File("Swingy/src/main/java/jules/rpg/charfiles").listFiles();
+        charSelect = new JComboBox<>();
         charList = new ArrayList<String>();
         titlePanel = new JPanel();
         charPanel = new JPanel();
@@ -68,7 +69,6 @@ public class GuiContinue extends JPanel implements ViewContinue {
                 charList.add(charFolder[i].getName());
             i++;
         }
-        charSelect = new JComboBox<String>();
         charSelect.setModel(new DefaultComboBoxModel<String>(charList.toArray(new String[0])));
         charSelect.setSelectedIndex(0);
         charPanel.add(charSelect);
