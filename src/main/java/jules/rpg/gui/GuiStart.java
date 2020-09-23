@@ -81,7 +81,8 @@ public class GuiStart extends JPanel implements ViewStart {
 
     @Override
     public void loadGame() {
-        selectGameButt.setText("This works!");
+        this.setVisible(false);
+        new GuiContinue().run();
     }
 
     @Override
