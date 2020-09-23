@@ -15,6 +15,7 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
 
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
+    private JPanel titlePanel;
     private JPanel charPanel;
     private JPanel classPanel;
     private JEditorPane classInfo;
@@ -39,6 +40,7 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
     
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
+        titlePanel = new JPanel();
         charPanel = new JPanel();
         classPanel = new JPanel();
         classInfo = new JEditorPane();
@@ -58,7 +60,10 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        charPanel.add(forgeLabel);
+        titlePanel.add(forgeLabel);
+        titlePanel.setVisible(true);
+        this.add(titlePanel, gbc);
+
         charPanel.add(charLabel);
         charPanel.add(charField);
         charPanel.setVisible(true);
