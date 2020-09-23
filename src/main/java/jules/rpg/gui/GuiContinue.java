@@ -39,13 +39,16 @@ public class GuiContinue extends JPanel implements ViewContinue {
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        charFolder = new File("../charfiles");
+        charFolder = new File("/src/main/java/jules/rpg/charfiles");
         charList = charFolder.list();
         charSelect = new JComboBox<>(charList);
         titlePanel = new JPanel();
         charPanel = new JPanel();
         loadLabel = new JLabel("LOAD CHARACTER\n");
         charLabel = new JLabel("SELECT\n");
+        loadButt = new JButton("Load");
+        delButt = new JButton("Delete");
+        backButt = new JButton("Back");
 
         App.getFrame().setTitle(charList[0]);
         this.setLayout(gbl);
@@ -60,13 +63,6 @@ public class GuiContinue extends JPanel implements ViewContinue {
         this.add(titlePanel, gbc);
 
         charPanel.add(charLabel);
-        // while (i < charFolder.length)
-        // {
-        //     if (charFolder[i].isFile())
-        //         charList.add(charFolder[i].getName());
-        //     i++;
-        // }
-        // charSelect.setModel(new DefaultComboBoxModel<String>(charList.toArray(new String[0])));
         charSelect.setSelectedIndex(0);
         charPanel.add(charSelect);
         charPanel.add(loadButt);
