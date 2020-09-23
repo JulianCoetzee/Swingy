@@ -5,7 +5,7 @@ import java.util.*;
 import javax.swing.*;
 
 import jules.rpg.gui.GuiStart;
-import jules.rpg.console.ConsoleStart;
+// import jules.rpg.console.ConsoleStart;
 
 public class App {
     // gui/console element init
@@ -20,8 +20,8 @@ public class App {
 
         if (args[0].equals("gui"))
             new GuiStart().run();
-        else if (args[0].equals("console"))
-                new ConsoleStart().run();
+        // else if (args[0].equals("console"))
+        //         new ConsoleStart().run();
         }
 
     //gui display/window behaviour
