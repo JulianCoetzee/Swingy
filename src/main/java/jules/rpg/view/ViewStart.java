@@ -1,4 +1,4 @@
-package jules.rpg.gui.view;
+package jules.rpg.view;
 
 public interface ViewStart {
 
@@ -8,5 +8,5 @@ public interface ViewStart {
 
     void loadGame();
 
-    void kwit();    
+    void kwit();  
 }

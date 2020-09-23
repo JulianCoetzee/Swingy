@@ -5,12 +5,10 @@ import java.util.*;
 import javax.swing.*;
 
 import jules.rpg.gui.GuiStart;
+import jules.rpg.console.ConsoleStart;
 
-/**
- * Hello world!
- *
- */
 public class App {
+    // gui/console element init
     private static JFrame frame;
     private static Scanner scanner;
 
@@ -22,10 +20,11 @@ public class App {
 
         if (args[0].equals("gui"))
             new GuiStart().run();
-        // else if (args[0].equals("console"))
-            //     new ConsoleStart().run();
+        else if (args[0].equals("console"))
+                new ConsoleStart().run();
         }
 
+    //gui display/window behaviour
     public static JFrame getFrame() {
         if (frame == null) {
             frame = new JFrame();

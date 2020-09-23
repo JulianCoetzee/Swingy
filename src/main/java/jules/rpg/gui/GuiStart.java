@@ -2,7 +2,7 @@ package jules.rpg.gui;
 
 import jules.rpg.App;
 import jules.rpg.control.StartControl;
-import jules.rpg.gui.view.ViewStart;
+import jules.rpg.view.ViewStart;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +29,7 @@ public class GuiStart extends JPanel implements ViewStart {
     private void guiMake() {
 
         gbl = new GridBagLayout();
-        gbc =new GridBagConstraints();
+        gbc = new GridBagConstraints();
         newGameButt = new JButton("New Game");
         selectGameButt = new JButton("Continue");
         kwit = new JButton("Exit");
@@ -75,7 +75,8 @@ public class GuiStart extends JPanel implements ViewStart {
     
     @Override
     public void newGame() {
-        newGameButt.setText("This works!");
+        this.setVisible(false);
+        new GuiNewGame().run();
     }
 
     @Override
@@ -86,6 +87,5 @@ public class GuiStart extends JPanel implements ViewStart {
     @Override
     public void kwit() {
         System.exit(1);
-    }
-    
+    }    
 }

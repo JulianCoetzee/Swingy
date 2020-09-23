@@ -1,6 +1,6 @@
 package jules.rpg.control;
 
-import jules.rpg.gui.view.ViewStart;
+import jules.rpg.view.ViewStart;
 
 public class StartControl {
 
