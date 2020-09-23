@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
 public class GuiNewGame extends JPanel implements ViewNewGame {
 
     private static final long serialVersionUID = 1L;
@@ -116,7 +115,7 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
         backButt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                control.onClickRogue(charField.getText());
+                control.onClickBack();
             }
 
         });
