@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.*;
 
 public class GuiContinue extends JPanel implements ViewContinue {
 
@@ -16,8 +17,8 @@ public class GuiContinue extends JPanel implements ViewContinue {
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
     private JComboBox<String> charSelect;
-    private String[] charList;
-    private File charFolder;
+    private ArrayList<String> charList;
+    private File[] charFolder;
     private JPanel titlePanel;
     private JPanel charPanel;
     private JLabel charLabel;
@@ -25,6 +26,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
     private JButton loadButt;
     private JButton delButt;
     private JButton backButt;
+    private int i;
 
     private ContinueControl control;
 
@@ -39,9 +41,9 @@ public class GuiContinue extends JPanel implements ViewContinue {
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        charFolder = new File("/src/main/java/jules/rpg/charfiles");
-        charList = charFolder.list();
-        charSelect = new JComboBox<>(charList);
+        charFolder = new File("../charfiles").listFiles();
+        charSelect = new JComboBox<>();
+        charList = new ArrayList<String>();
         titlePanel = new JPanel();
         charPanel = new JPanel();
         loadLabel = new JLabel("LOAD CHARACTER\n");
@@ -49,8 +51,9 @@ public class GuiContinue extends JPanel implements ViewContinue {
         loadButt = new JButton("Load");
         delButt = new JButton("Delete");
         backButt = new JButton("Back");
-
-        App.getFrame().setTitle(charList[0]);
+        i = 0;
+        
+        App.getFrame().setTitle("Reforge");
         this.setLayout(gbl);
         this.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
@@ -63,6 +66,13 @@ public class GuiContinue extends JPanel implements ViewContinue {
         this.add(titlePanel, gbc);
 
         charPanel.add(charLabel);
+        while (i < charFolder.length)
+        {
+            if (charFolder[i].isFile())
+                charList.add(charFolder[i].getName());
+            i++;
+        }
+        charSelect.setModel(new DefaultComboBoxModel<String>(charList.toArray(new String[0])));
         charSelect.setSelectedIndex(0);
         charPanel.add(charSelect);
         charPanel.add(loadButt);
