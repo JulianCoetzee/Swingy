@@ -47,7 +47,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
         loadLabel = new JLabel("LOAD CHARACTER\n");
         charLabel = new JLabel("SELECT\n");
 
-        App.getFrame().setTitle("Reforge");
+        App.getFrame().setTitle(charList[0]);
         this.setLayout(gbl);
         this.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
