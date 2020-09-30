@@ -145,7 +145,11 @@ public class Hero extends Pos {
             }
             throw new HeroNotValid(stringBuilder.toString());
         }
-    } 
+    }
+    
+    // public Hero getHero() {
+        
+    // }
 
     public String getName() {
         return name;

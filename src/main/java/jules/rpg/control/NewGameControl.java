@@ -7,7 +7,6 @@ import jules.rpg.game.characters.*;
 public class NewGameControl {
 
     private ViewNewGame view;
-    private HeroMaker HM;
     private Hero hero;
     private Game game;
     
@@ -19,7 +18,7 @@ public class NewGameControl {
     public void onClickWar(String name) {
         try 
         {
-            hero = HM.getHM().makeWarrior(name);
+            hero = HeroMaker.makeWarrior(name);
             hero.validateHero();
         }
         catch (HeroNotValid e) 
@@ -33,7 +32,7 @@ public class NewGameControl {
     public void onClickRanger(String name) {
         try
         {
-            hero = HM.getHM().makeRanger(name);
+            hero = HeroMaker.makeRanger(name);
             hero.validateHero();
         }
         catch (HeroNotValid e) {
@@ -46,7 +45,7 @@ public class NewGameControl {
     public void onClickRogue(String name) {
         try
         {
-            hero = HM.getHM().makeRogue(name);
+            hero = HeroMaker.makeRogue(name);
             hero.validateHero();
         }
         catch (HeroNotValid  e) 

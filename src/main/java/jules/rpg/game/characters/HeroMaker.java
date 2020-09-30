@@ -1,28 +1,26 @@
 package jules.rpg.game.characters;
 
-public class HeroMaker {
-
-    private HeroMaker HM;
+public abstract class HeroMaker {
 
     private HeroMaker() {
 
     }
 
-    public HeroMaker getHM() {
-        HM = new HeroMaker();
+    // public HeroMaker getHM() {
+    //     this.HM = new HeroMaker();
 
-        return (HM);
-    }
+    //     return (this.HM);
+    // }
     
-    public Hero makeWarrior(String name) {
+    public static Hero makeWarrior(String name) {
         return (new Hero(name, "Warrior"));
     }
 
-    public Hero makeRanger(String name) {
+    public static Hero makeRanger(String name) {
         return (new Hero(name, "Ranger"));
     }
 
-    public Hero makeRogue(String name) {
+    public static Hero makeRogue(String name) {
         return (new Hero(name, "Rogue"));
     }
 }
