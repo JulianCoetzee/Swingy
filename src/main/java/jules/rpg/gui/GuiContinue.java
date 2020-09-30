@@ -41,7 +41,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        charFolder = new File("../charfiles").listFiles();
+        charFolder = new File("src/main/java/jules/rpg/charfiles").listFiles();
         charSelect = new JComboBox<>();
         charList = new ArrayList<String>();
         titlePanel = new JPanel();

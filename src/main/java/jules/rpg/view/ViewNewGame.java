@@ -4,11 +4,9 @@ public interface ViewNewGame {
 
     void run();
 
-    void makeWarrior();
+    void startNewGame();
 
-    void makeRanger();
-
-    void makeRogue();
+    void invalidHero(String err);
     
     void retreat();
 }

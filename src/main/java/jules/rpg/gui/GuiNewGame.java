@@ -72,7 +72,7 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
         classInfo.setFont(new Font("monospaced", Font.PLAIN, 12));
         classInfo.setText(
             "Class      Attack  Defense HP\n" +
-            "Warrior    20      30      120\n" +
+            "Warrior    20      30      100\n" +
             "Ranger     30      20      100\n" +
             "Rogue      30      30      80\n");
         classInfo.setPreferredSize(new Dimension(160, 90));
@@ -117,26 +117,19 @@ public class GuiNewGame extends JPanel implements ViewNewGame {
             public void actionPerformed(ActionEvent e) {
                 control.onClickBack();
             }
-
         });
     }
 
     @Override
-    public void makeWarrior() {
+    public void startNewGame() {
         this.setVisible(false);
-        new GuiStart().run();
+        new GuiGame().run();
     }
 
     @Override
-    public void makeRanger() {
-        this.setVisible(false);
-        new GuiStart().run();
-    }
-
-    @Override
-    public void makeRogue() {
-        this.setVisible(false);
-        new GuiStart().run();
+    public void invalidHero(String err) {
+        JOptionPane.showMessageDialog(App.getFrame(), err);
+        new GuiNewGame().run();
     }
 
     @Override
