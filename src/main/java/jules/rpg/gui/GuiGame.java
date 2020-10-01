@@ -125,8 +125,8 @@ public class GuiGame extends JPanel implements ViewGame {
         int i = 0;
         int j = 0;
         int ml = map.length;
-        int heroPosx = game.getHeroPos().getx();
-        int heroPosy = game.getHeroPos().gety();
+        int heroPosx = heroPos.getx();
+        int heroPosy = heroPos.gety();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("MAP %dx%d\n", ml, ml));
 
