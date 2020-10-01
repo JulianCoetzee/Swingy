@@ -19,6 +19,7 @@ public class GuiGame extends JPanel implements ViewGame {
     private JPanel titlePanel;
     private JPanel mapPanel;
     private JEditorPane mapPane;
+    private JScrollPane mapScroll;
     private Game game;
     private JPanel ctrlPanel;
     private JLabel titleLabel;
@@ -38,7 +39,7 @@ public class GuiGame extends JPanel implements ViewGame {
         control = new GameControl(this);
 
         guiMake();
-        control.setGame();
+        control.openMap();
     }
 
     private void guiMake() {
@@ -49,6 +50,7 @@ public class GuiGame extends JPanel implements ViewGame {
         mapPanel = new JPanel();
         ctrlPanel = new JPanel();
         mapPane = new JEditorPane();
+        mapScroll = new JScrollPane(mapPane);
         titleLabel = new JLabel("ADVENTURE TO THE EDGE");
         ctrlLabel = new JLabel("CONTROLS");
         northButt = new JButton("North");
@@ -72,7 +74,8 @@ public class GuiGame extends JPanel implements ViewGame {
         this.add(titlePanel, gbc);
 
         mapPanel.add(mapPane);
-        // mapPanel.add(charField);
+        mapScroll.setPreferredSize(new Dimension(300, 300));
+        mapScroll.setMinimumSize(new Dimension(200, 200));
         mapPanel.setVisible(true);
         this.add(mapPanel, gbc);
 
@@ -119,13 +122,14 @@ public class GuiGame extends JPanel implements ViewGame {
     }
 
     @Override
-    public void printMap(Map map) {
+    public void printMap(boolean[][] map, Pos heroPos) {
 
         int i = 0;
         int j = 0;
-        int ms = map.getMapSize();
-        int heroPosx = map.getHero().getx();
-        int heroPosy = map.getHero().gety();
+        int ml = game.getHero().getLvl();
+        int ms = game.calcMapSize(ml);
+        int heroPosx = game.getHeroPos().getx();
+        int heroPosy = game.getHeroPos().gety();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("MAP %dx%d\n", ms, ms));
 
@@ -133,8 +137,12 @@ public class GuiGame extends JPanel implements ViewGame {
         {
             while(j < ms)
             {
-                if (j == heroPosy && i == heroPosx)
+                if(j == heroPosy && i == heroPosx)
                     stringBuilder.append("H");
+                else if(map[i][j])
+                {
+                    stringBuilder.append("X");
+                }
                 else
                     stringBuilder.append(".");
                 j++;
@@ -147,8 +155,8 @@ public class GuiGame extends JPanel implements ViewGame {
 
     @Override
     public void updateMap(Game game) {
-        // TODO Auto-generated method stub
 
+        printMap(game.getMap(), game.getHeroPos());
     }
 
     @Override

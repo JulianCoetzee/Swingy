@@ -6,115 +6,83 @@ import java.util.Set;
 import javax.validation.*;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
 
-import jules.rpg.game.world.Pos;
-import jules.rpg.game.characters.*;
-
-public class Hero extends Pos {
+public class Hero extends Entity {
 
     // savefile
     private String savePath = "./src/main/java/jules/rpg/charfiles/";
     private File save;
     private PrintWriter savewrite;
-    // stat block
-
-    @NotNull(message = "Name this Champion")
-    @Size(min = 1, max = 16)
-    protected String name;
 
     @NotNull(message = "No Hero type")
     protected String type;
 
-    @Range(min = 0, max = 10)
+    @Min(value = 0, message = "Cannot be below lvl 0")
     protected int lvl;
 
-    @Min(0)
+    @Min(value = 0, message = "Cannot have 0 xp")
     protected int xp;
-
-    @Min(0)
-    protected int atk;
-
-    @Min(0)
-    protected int def;
-
-    @Min(1)
-    protected int hp;
-
-    @Min(0)
-    protected int max;
 
     protected String[] heroclass = { "Warrior", "Ranger", "Rogue" };
 
-    // new hero
-    public Hero(String name, String type) {
-        this.name = name;
-        this.type = type;
-        this.lvl = 0;
-        this.xp = 0;
+    public Hero(String name, int atk, int def, int hp,
+                String type, int lvl, int xp) {
 
-        if (type.equals(heroclass[1])) {
-            this.atk = 20;
-            this.def = 30;
-            this.hp = 100;
-            this.max = 100;
+        super(name, atk, def, hp);
+        this.type = type;
+        this.lvl = lvl;
+        this.xp = xp;
+    }
+
+    public void saveMe(Hero hero) {
+
+        if (hero.type.equals(heroclass[1])) {
             save = new File(savePath + name + "_Warrior.txt");
             try {
                 savewrite = new PrintWriter(save);
-                savewrite.println(this.name);
-                savewrite.println(this.type);
-                savewrite.println(this.lvl);
-                savewrite.println(this.xp);
-                savewrite.println(this.atk);
-                savewrite.println(this.def);
-                savewrite.println(this.hp);
-                savewrite.println(this.max);
+                savewrite.println(hero.name);
+                savewrite.println(hero.type);
+                savewrite.println(hero.lvl);
+                savewrite.println(hero.xp);
+                savewrite.println(hero.atk);
+                savewrite.println(hero.def);
+                savewrite.println(hero.hp);
             }
             catch (FileNotFoundException fnf) {
                 System.out.println("Error: " + fnf.getMessage());
                 return ;
             }
         }
-        else if (type.equals(heroclass[2]))
+        else if (hero.type.equals(heroclass[2]))
         {
-            this.atk = 30;
-            this.def = 20;
-            this.hp = 100;
-            this.max = 100;
             save = new File(savePath + name + "_Ranger.txt");
             try {
                 savewrite = new PrintWriter(save);
-                savewrite.println(this.name);
-                savewrite.println(this.type);
-                savewrite.println(this.lvl);
-                savewrite.println(this.xp);
-                savewrite.println(this.atk);
-                savewrite.println(this.def);
-                savewrite.println(this.hp);
-                savewrite.println(this.max);
+                savewrite.println(hero.name);
+                savewrite.println(hero.type);
+                savewrite.println(hero.lvl);
+                savewrite.println(hero.xp);
+                savewrite.println(hero.atk);
+                savewrite.println(hero.def);
+                savewrite.println(hero.hp);
             }
             catch (FileNotFoundException fnf) {
                 System.out.println("Error: " + fnf.getMessage());
                 return ;
             }
         }
-        else if (type.equals(heroclass[3]))
+        else if (hero.type.equals(heroclass[3]))
         {
-            this.atk = 30;
-            this.def = 30;
-            this.hp = 80;
-            this.max = 80;
             save = new File(savePath + name + "_Rogue.txt");
             try {
                 savewrite = new PrintWriter(save);
-                savewrite.println(this.name);
-                savewrite.println(this.type);
-                savewrite.println(this.lvl);
-                savewrite.println(this.xp);
-                savewrite.println(this.atk);
-                savewrite.println(this.def);
-                savewrite.println(this.hp);
-                savewrite.println(this.max);
+                savewrite.println(hero.name);
+                savewrite.println(hero.type);
+                savewrite.println(hero.lvl);
+                savewrite.println(hero.xp);
+                savewrite.println(hero.atk);
+                savewrite.println(hero.def);
+                savewrite.println(hero.hp);
             }
             catch (FileNotFoundException fnf) {
                 System.out.println("Error: " + fnf.getMessage());
@@ -146,14 +114,6 @@ public class Hero extends Pos {
             throw new HeroNotValid(stringBuilder.toString());
         }
     }
-    
-    // public Hero getHero() {
-        
-    // }
-
-    public String getName() {
-        return name;
-    }
 
     public String getType() {
         return type;
@@ -167,36 +127,31 @@ public class Hero extends Pos {
         return xp;
     }
 
-    public int getAtk() {
-        return atk;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getDef() {
-        return def;
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
     }
 
-    public int getHP() {
-        return hp;
+    public void setxp(int xp) {
+        this.xp = xp;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addxp(int gains) {
+
+        int nextLevel = (lvl + 1) * 1000 + lvl * lvl * 450;
+
+        if (xp + gains >= nextLevel)
+            levelUp();
+        xp = xp + gains;
     }
 
-    public void setAtk(int atk) {
-        this.atk = atk;
-    }
-
-    public void setDef(int def) {
-        this.def = def;
-    }
-
-    public void setHP(int hp) {
-        this.hp = hp;
-    }
-
-    @Override
-    public char getChar() {
-        return ('H');
+    private void levelUp() {
+        lvl++;
+        hp = hp + 50 + lvl * 10;
+        atk = atk + lvl * 3;
+        def = def + lvl * 2;
     }
 }

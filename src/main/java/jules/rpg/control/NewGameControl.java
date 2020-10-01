@@ -18,7 +18,7 @@ public class NewGameControl {
     public void onClickWar(String name) {
         try 
         {
-            hero = HeroMaker.makeWarrior(name);
+            hero = ForgeMe.newHero(name, "Warrior");
             hero.validateHero();
         }
         catch (HeroNotValid e) 
@@ -32,7 +32,7 @@ public class NewGameControl {
     public void onClickRanger(String name) {
         try
         {
-            hero = HeroMaker.makeRanger(name);
+            hero = ForgeMe.newHero(name, "Ranger");
             hero.validateHero();
         }
         catch (HeroNotValid e) {
@@ -45,7 +45,7 @@ public class NewGameControl {
     public void onClickRogue(String name) {
         try
         {
-            hero = HeroMaker.makeRogue(name);
+            hero = ForgeMe.newHero(name, "Rogue");
             hero.validateHero();
         }
         catch (HeroNotValid  e) 

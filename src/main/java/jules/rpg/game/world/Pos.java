@@ -1,14 +1,9 @@
 package jules.rpg.game.world;
 
-public abstract class Pos {
+public class Pos {
     
     private int x;
     private int y;
-
-    public Pos()
-    {
-        
-    }
 
     public Pos (int x, int y) {
         this.x = x;
@@ -28,10 +23,4 @@ public abstract class Pos {
         this.y = y;
     }
 
-    public boolean isEmpty()
-    {
-        return false;
-    }
-
-    public abstract char getChar();
 }

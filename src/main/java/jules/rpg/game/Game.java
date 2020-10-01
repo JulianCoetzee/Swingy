@@ -1,6 +1,5 @@
 package jules.rpg.game;
 
-import jules.rpg.control.GameControl;
 import jules.rpg.game.characters.*;
 import jules.rpg.game.world.*;
 
@@ -8,7 +7,9 @@ public class Game {
 
     private static Game gameI = null;
     private Hero hero;
-    private Map map;
+    private Pos heroPos;
+    private int mapSize;
+    private boolean[][] map;
 
     private Game() {
 
@@ -24,15 +25,63 @@ public class Game {
     public void initGame(Hero hero) {
 
         this.hero = hero;
-        this.map = new Map(hero);
+        makeMap(hero);
+        initHeroPos();
     }
-    
-    public Map getMap() {
-        return (this.map);
+ 
+    private void makeMap(Hero hero) {
+
+        int mapLvl;
+        
+        mapLvl = hero.getLvl();
+        mapSize = calcMapSize(mapLvl);
+        map = new boolean[mapSize][mapSize];
+    }
+
+    public int calcMapSize(int lvl) {
+
+        return ((lvl - 1) * 5 + 10 - (lvl % 2));
+    }
+
+    private void initHeroPos ()
+    {
+        int center = this.mapSize / 2;
+
+        heroPos = new Pos(center, center);
+        map[heroPos.getx()][heroPos.gety()] = false;
     }
 
     public Hero getHero() {
-        return (this.hero);
+
+        return (hero);
+    }
+
+    public Pos getHeroPos() {
+
+        return (heroPos);
+    }
+
+    public boolean[][] getMap() {
+
+        return (map);
+    }
+
+    public int getmapSize() {
+        return (mapSize);
+    }
+
+    public void setHero(Hero hero) {
+
+        this.hero = hero;
     }
     
+    public void setHeroPos(Pos heroPos) {
+
+        this.heroPos = heroPos;
+    }
+
+    public void setMap(boolean[][] map) {
+
+        this.map = map;
+    }
 }
