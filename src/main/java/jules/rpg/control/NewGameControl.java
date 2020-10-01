@@ -24,6 +24,7 @@ public class NewGameControl {
         catch (HeroNotValid e) 
         {
             view.invalidHero(e.getMessage());
+            return ;
         }
         game.initGame(hero);
         view.startNewGame();
@@ -35,8 +36,10 @@ public class NewGameControl {
             hero = ForgeMe.newHero(name, "Ranger");
             hero.validateHero();
         }
-        catch (HeroNotValid e) {
+        catch (HeroNotValid e) 
+        {
             view.invalidHero(e.getMessage());
+            return ;
         }
         game.initGame(hero);
         view.startNewGame();
@@ -51,7 +54,9 @@ public class NewGameControl {
         catch (HeroNotValid  e) 
         {
             view.invalidHero(e.getMessage());
+            return ;
         }
+        hero.saveMe(hero);
         game.initGame(hero);
         view.startNewGame();
     }

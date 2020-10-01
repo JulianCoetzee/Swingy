@@ -50,7 +50,6 @@ public class GuiGame extends JPanel implements ViewGame {
         mapPanel = new JPanel();
         ctrlPanel = new JPanel();
         mapPane = new JEditorPane();
-        mapScroll = new JScrollPane(mapPane);
         titleLabel = new JLabel("ADVENTURE TO THE EDGE");
         ctrlLabel = new JLabel("CONTROLS");
         northButt = new JButton("North");
@@ -74,6 +73,7 @@ public class GuiGame extends JPanel implements ViewGame {
         this.add(titlePanel, gbc);
 
         mapPanel.add(mapPane);
+        mapScroll = new JScrollPane(mapPane);
         mapScroll.setPreferredSize(new Dimension(300, 300));
         mapScroll.setMinimumSize(new Dimension(200, 200));
         mapPanel.setVisible(true);
@@ -93,8 +93,6 @@ public class GuiGame extends JPanel implements ViewGame {
         });
     }
 
-    // @Override
-    // public void
     // @Override
     // public void north() {
 
@@ -126,16 +124,15 @@ public class GuiGame extends JPanel implements ViewGame {
 
         int i = 0;
         int j = 0;
-        int ml = game.getHero().getLvl();
-        int ms = game.calcMapSize(ml);
+        int ml = map.length;
         int heroPosx = game.getHeroPos().getx();
         int heroPosy = game.getHeroPos().gety();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("MAP %dx%d\n", ms, ms));
+        stringBuilder.append(String.format("MAP %dx%d\n", ml, ml));
 
-        while (i < ms)
+        while (i < ml)
         {
-            while(j < ms)
+            while(j < map[i].length)
             {
                 if(j == heroPosy && i == heroPosx)
                     stringBuilder.append("H");

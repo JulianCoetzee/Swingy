@@ -6,6 +6,7 @@ import jules.rpg.game.world.*;
 public class Game {
 
     private static Game gameI = null;
+    
     private Hero hero;
     private Pos heroPos;
     private int mapSize;
