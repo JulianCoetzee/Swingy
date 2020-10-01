@@ -14,6 +14,9 @@ public class Hero extends Entity {
     private File save;
     private PrintWriter savewrite;
 
+    ValidatorFactory vf;
+    StringBuilder sb;
+
     @NotNull(message = "No Hero type")
     protected String type;
 
@@ -93,25 +96,27 @@ public class Hero extends Entity {
 
     public void validateHero() throws HeroNotValid {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
+        vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
 
         Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(this);
-        if (constraintViolations.size() != 0) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Hero validation error(s): ");
-            stringBuilder.append(constraintViolations.size());
-            stringBuilder.append("\n");
-            for (ConstraintViolation<Hero> cv : constraintViolations) {
-                stringBuilder.append("property: [");
-                stringBuilder.append(cv.getPropertyPath());
-                stringBuilder.append("], value: [");
-                stringBuilder.append(cv.getInvalidValue());
-                stringBuilder.append("], message: [");
-                stringBuilder.append(cv.getMessage());
-                stringBuilder.append("]\n");
+        if (constraintViolations.size() != 0)
+        {
+            sb = new StringBuilder();
+            sb.append("Hero validation error(s): ");
+            sb.append(constraintViolations.size());
+            sb.append("\n");
+            for (ConstraintViolation<Hero> cv : constraintViolations)
+            {
+                sb.append("property: [");
+                sb.append(cv.getPropertyPath());
+                sb.append("], value: [");
+                sb.append(cv.getInvalidValue());
+                sb.append("], message: [");
+                sb.append(cv.getMessage());
+                sb.append("]\n");
             }
-            throw new HeroNotValid(stringBuilder.toString());
+            throw new HeroNotValid(sb.toString());
         }
     }
 
