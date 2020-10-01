@@ -66,7 +66,7 @@ public abstract class Entity {
 
         while (vs.getHP() > 0 && this.getHP() > 0)
         {
-            luck = ThreadLocalRandom.current().nextInt(1, 6);
+            luck = ThreadLocalRandom.current().nextInt(1, 7);
             if (this.atk > vs.def)
             {
                 dmg = this.atk - vs.def;

@@ -17,8 +17,9 @@ public class GuiGame extends JPanel implements ViewGame {
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
     private JPanel titlePanel;
-    private JPanel mapPanel;
+    // private JPanel mapPanel;
     private JEditorPane mapPane;
+    private JEditorPane infoPane;
     private JScrollPane mapScroll;
     private Game game;
     private JPanel ctrlPanel;
@@ -47,7 +48,7 @@ public class GuiGame extends JPanel implements ViewGame {
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
         titlePanel = new JPanel();
-        mapPanel = new JPanel();
+        // mapPanel = new JPanel();
         ctrlPanel = new JPanel();
         mapPane = new JEditorPane();
         titleLabel = new JLabel("ADVENTURE TO THE EDGE");
@@ -60,7 +61,7 @@ public class GuiGame extends JPanel implements ViewGame {
         fleeButt = new JButton("Flee");
         backButt = new JButton("Back");
 
-        App.getFrame().setTitle("Forge");
+        App.getFrame().setTitle("Adventure");
         this.setLayout(gbl);
         this.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
 
@@ -72,12 +73,11 @@ public class GuiGame extends JPanel implements ViewGame {
         titlePanel.setVisible(true);
         this.add(titlePanel, gbc);
 
-        mapPanel.add(mapPane);
+        mapPane.setEditable(false);
+        mapPane.setText("Map");
         mapScroll = new JScrollPane(mapPane);
         mapScroll.setPreferredSize(new Dimension(300, 300));
         mapScroll.setMinimumSize(new Dimension(200, 200));
-        mapPanel.setVisible(true);
-        this.add(mapPanel, gbc);
 
         this.add(backButt, gbc);
         this.setVisible(true);
