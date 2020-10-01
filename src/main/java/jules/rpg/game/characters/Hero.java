@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.logging.*;
 import java.util.Set;
 import javax.validation.*;
-import javax.validation.ValidatorFactory;
+// import javax.validation.ValidatorFactory;
 import javax.validation.constraints.*;
 
 public class Hero extends Entity {
@@ -13,9 +13,6 @@ public class Hero extends Entity {
     private String savePath = "./src/main/java/jules/rpg/charfiles/";
     private File save;
     private PrintWriter savewrite;
-
-    ValidatorFactory vf;
-    StringBuilder sb;
 
     @NotNull(message = "No Hero type")
     protected String type;
@@ -96,13 +93,13 @@ public class Hero extends Entity {
 
     public void validateHero() throws HeroNotValid {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
 
         Set<ConstraintViolation<Hero>> constraintViolations = validator.validate(this);
         if (constraintViolations.size() != 0)
         {
-            sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append("Hero validation error(s): ");
             sb.append(constraintViolations.size());
             sb.append("\n");
