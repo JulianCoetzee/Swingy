@@ -17,12 +17,14 @@ public class GameControl {
     }
 
     public void openMap() {
-        view.printMap(game.getMap(), game.getHeroPos());
+
+        view.updateMap(game);
     }
 
     public void onPrintMap() {
+
         view.printMap(game.getMap(), game.getHeroPos());
-        // view.updateMap(game);
+        view.updateMap(game);
     }
 
     public void moveMe(String move) {

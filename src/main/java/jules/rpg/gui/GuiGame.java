@@ -79,7 +79,7 @@ public class GuiGame extends JPanel implements ViewGame {
         infoPane.setPreferredSize(new Dimension(220, 190));
         infoPane.setMinimumSize(new Dimension(200, 200));
         this.add(infoPane, gbc);
-        
+
         gbc.insets = new Insets(5, 5, 5, 5);
 
         mapPane.setEditable(false);
@@ -143,7 +143,7 @@ public class GuiGame extends JPanel implements ViewGame {
         {
             while(j < map[i].length)
             {
-                if(j == heroPosy && i == heroPosx)
+                if(i == heroPosy && j == heroPosx)
                     stringBuilder.append("H");
                 else if(map[i][j])
                 {
@@ -161,6 +161,10 @@ public class GuiGame extends JPanel implements ViewGame {
 
     @Override
     public void updateMap(Game game) {
+
+        infoPane.setText(game.getHero().toString() +
+        "Position: " + "(" + game.getHeroPos().getx() +
+        "," + game.getHeroPos().gety() + ")");
 
         printMap(game.getMap(), game.getHeroPos());
     }
