@@ -56,8 +56,8 @@ public class NewGameControl {
             view.invalidHero(e.getMessage());
             return ;
         }
-        hero.saveMe(hero);
         game.initGame(hero);
+        hero.saveMe(hero);
         view.startNewGame();
     }
 

@@ -21,7 +21,7 @@ public class Hero extends Entity {
     @Min(value = 0, message = "Cannot be below lvl 0")
     protected int lvl;
 
-    @Min(value = 0, message = "Cannot have 0 xp")
+    @Min(value = 0, message = "Cannot have < 0 xp")
     protected int xp;
 
     protected String[] heroclass = { "Warrior", "Ranger", "Rogue" };
