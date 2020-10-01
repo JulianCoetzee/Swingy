@@ -90,7 +90,7 @@ public class Game {
 
     public Pos getHeroPos() {
 
-        return (heroPos);
+        return (this.heroPos);
     }
 
     public boolean[][] getMap() {
