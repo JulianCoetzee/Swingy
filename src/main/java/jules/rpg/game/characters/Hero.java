@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.logging.*;
 import java.util.Set;
 import javax.validation.*;
-// import javax.validation.ValidatorFactory;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.*;
 
 public class Hero extends Entity {
