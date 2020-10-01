@@ -51,6 +51,7 @@ public class GuiGame extends JPanel implements ViewGame {
         // mapPanel = new JPanel();
         ctrlPanel = new JPanel();
         mapPane = new JEditorPane();
+        infoPane = new JEditorPane();
         titleLabel = new JLabel("ADVENTURE TO THE EDGE");
         ctrlLabel = new JLabel("CONTROLS");
         northButt = new JButton("North");
@@ -67,11 +68,19 @@ public class GuiGame extends JPanel implements ViewGame {
 
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        
 
-        titlePanel.add(titleLabel);
-        titlePanel.setVisible(true);
-        this.add(titlePanel, gbc);
+        // titlePanel.add(titleLabel);
+        // titlePanel.setVisible(true);
+        // this.add(titlePanel, gbc);
+
+        infoPane.setEditable(false);
+        infoPane.setText("Select Hero for more info");
+        infoPane.setPreferredSize(new Dimension(220, 190));
+        infoPane.setMinimumSize(new Dimension(200, 200));
+        this.add(infoPane, gbc);
+        
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         mapPane.setEditable(false);
         mapPane.setText("Map");
