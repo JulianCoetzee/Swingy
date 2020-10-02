@@ -75,7 +75,7 @@ public class Hero extends Entity {
         sb.append("DEF: ").append(def).append("\n");
         sb.append("HP: ").append(hp).append("\n");
 
-        sb.append("Weapon: ");
+        sb.append("Sword: ");
         if (sword != null)
             sb.append(sword.getName()).append(" (attack +").append(sword.getStats()).append(")\n");
         else

@@ -131,14 +131,16 @@ public class GuiGame extends JPanel implements ViewGame {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("MAP %dx%d\n", ml, ml));
 
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
+        for (int i = 0; i < map.length; i++) 
+        {
+            for (int j = 0; j < map[i].length; j++) 
+            {
                 if (heroPosx == j && heroPosy == i)
-                    stringBuilder.append("! ");
+                    stringBuilder.append("[H] ");
                 else if (map[i][j])
-                    stringBuilder.append("* ");
+                    stringBuilder.append("[X] ");
                 else
-                    stringBuilder.append(". ");
+                    stringBuilder.append("[ ] ");
             }
             stringBuilder.append("\n");
         }
