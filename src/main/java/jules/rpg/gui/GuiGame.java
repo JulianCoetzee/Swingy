@@ -68,7 +68,7 @@ public class GuiGame extends JPanel implements ViewGame {
         mapPane.setEditable(false);
         mapPane.setText("Map");
         mapScroll = new JScrollPane(mapPane);
-        mapScroll.setPreferredSize(new Dimension(300, 300));
+        mapScroll.setPreferredSize(new Dimension(500, 500));
         mapScroll.setMinimumSize(new Dimension(200, 200));
         this.add(mapScroll, gbc);
 

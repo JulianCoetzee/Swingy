@@ -26,7 +26,6 @@ public class ContinueControl {
             view.invalidHero(e.getMessage());
             return ;
         }
-        System.out.println(hero.getName());
         game.initGame(hero);
         view.startGame();
     }

@@ -110,7 +110,7 @@ public class GameControl {
 
         if (xp >= 0)
         {
-            view.showMsg("Glory! You gain " + xp + "xp!");
+            view.showMsg("Glory! You have slain the " + enemy.getName() + "!\nYou gain " + xp + "xp!");
             gainXP(xp);
             game.getMap()[game.getHeroPos().gety()][game.getHeroPos().getx()] = false;
             setLootGear(enemy.getLoot());
@@ -147,7 +147,7 @@ public class GameControl {
                     view.newGear("Current Armor: " + game.getHero().getArmor() + "\n Loot:" + loot))
                     {
                         game.getHero().equipArmor((Armor) loot);
-                        view.showMsg("Equipped.");
+                        view.showMsg("Equipped" + loot.getName() + ".");
                     }
             }
             else if (loot instanceof Helmet)
@@ -156,7 +156,7 @@ public class GameControl {
                     view.newGear("Current Helmet: " + game.getHero().getHelmet() + "\n Loot:" + loot))
                     {
                         game.getHero().equipHelmet((Helmet) loot);
-                        view.showMsg("Equipped.");
+                        view.showMsg("Equipped" + loot.getName() + ".");
                     }
             }
             else if (loot instanceof Sword)
@@ -165,7 +165,7 @@ public class GameControl {
                     view.newGear("Current Sword: " + game.getHero().getSword() + "\n Loot:" + loot))
                     {
                         game.getHero().equipSword((Sword) loot);
-                        view.showMsg("Equipped.");
+                        view.showMsg("Equipped" + loot.getName() + ".");
                     }
             }
         }

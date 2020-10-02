@@ -29,7 +29,7 @@ public class App {
         if (frame == null) {
             frame = new JFrame();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            frame.setSize(500, 400);
+            frame.setSize(1280, 960);
             frameListener();
         }
         return frame;
