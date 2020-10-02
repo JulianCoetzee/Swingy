@@ -67,28 +67,28 @@ public abstract class Save {
                 savewrite.print("");
                 StringBuilder sb = new StringBuilder();
                 sb.append("Name: ").append(hero.name).append("\n");
-                sb.append("Class: ").append(hero.type).append("\n");
-                sb.append("Level: ").append(hero.lvl).append("\n");
-                sb.append("XP: ").append(hero.xp).append("\n");
-                sb.append("ATK: ").append(hero.atk).append("\n");
-                sb.append("DEF: ").append(hero.def).append("\n");
-                sb.append("HP: ").append(hero.hp).append("\n");
+                sb.append("Class: ").append(hero.getType()).append("\n");
+                sb.append("Level: ").append(hero.getLvl()).append("\n");
+                sb.append("XP: ").append(hero.getxp()).append("\n");
+                sb.append("ATK: ").append(hero.getAtk()).append("\n");
+                sb.append("DEF: ").append(hero.getDef()).append("\n");
+                sb.append("HP: ").append(hero.getHP()).append("\n");
         
                 sb.append("Sword: ");
-                if (hero.sword != null)
-                    sb.append(hero.sword.getName()).append(" (attack +").append(hero.sword.getStats()).append(")\n");
+                if (hero.getSword() != null)
+                    sb.append(hero.getSword().getName()).append(" (attack +").append(hero.getSword().getStats()).append(")\n");
                 else
                     sb.append("\n");
         
                 sb.append("Helmet: ");
-                if (hero.helm != null)
-                    sb.append(hero.helm.getName()).append(" (hp +").append(hero.helm.getStats()).append(")\n");
+                if (hero.getHelmet() != null)
+                    sb.append(hero.getHelmet().getName()).append(" (hp +").append(hero.getHelmet().getStats()).append(")\n");
                 else
                     sb.append("\n");
         
                 sb.append("Armor: ");
-                if (hero.armor != null)
-                    sb.append(hero.armor.getName()).append(" (defense +").append(hero.armor.getStats()).append(")\n");
+                if (hero.getArmor() != null)
+                    sb.append(hero.getArmor().getName()).append(" (defense +").append(hero.getArmor().getStats()).append(")\n");
                 else
                     sb.append("\n");
                 savewrite.print(sb.toString());
