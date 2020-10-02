@@ -13,7 +13,7 @@ public abstract class Save {
 
     public static void saveMe(Hero hero) {
 
-        if (hero.type.equals(heroclass[1])) {
+        if (hero.type.equals(heroclass[0])) {
             save = new File(savePath + hero.name + "_Warrior.txt");
             try 
             {
@@ -35,7 +35,7 @@ public abstract class Save {
                 return ;
             }
         }
-        else if (hero.type.equals(heroclass[2]))
+        else if (hero.type.equals(heroclass[1]))
         {
             save = new File(savePath + hero.name + "_Ranger.txt");
             try 
@@ -58,7 +58,7 @@ public abstract class Save {
                 return ;
             }
         }
-        else if (hero.type.equals(heroclass[3]))
+        else if (hero.type.equals(heroclass[2]))
         {
             save = new File(savePath + hero.name + "_Rogue.txt");
             try 

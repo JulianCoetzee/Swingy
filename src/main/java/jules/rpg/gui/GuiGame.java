@@ -51,7 +51,7 @@ public class GuiGame extends JPanel implements ViewGame {
 
         App.getFrame().setTitle("Adventure");
         this.setLayout(gbl);
-        this.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -69,6 +69,7 @@ public class GuiGame extends JPanel implements ViewGame {
         mapScroll = new JScrollPane(mapPane);
         mapScroll.setPreferredSize(new Dimension(300, 300));
         mapScroll.setMinimumSize(new Dimension(200, 200));
+        this.add(mapScroll, gbc);
 
         this.add(northButt, gbc);
         this.add(eastButt, gbc);
@@ -114,6 +115,7 @@ public class GuiGame extends JPanel implements ViewGame {
 
     @Override
     public void retreat() {
+
         this.setVisible(false);
         new GuiStart().run();
     }
@@ -121,28 +123,24 @@ public class GuiGame extends JPanel implements ViewGame {
     @Override
     public void printMap(boolean[][] map, Pos heroPos) {
 
-        int i = 0;
-        int j = 0;
+        // int i = 0;
+        // int j = 0;
         int ml = map.length;
         int heroPosx = heroPos.getx();
         int heroPosy = heroPos.gety();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("MAP %dx%d\n", ml, ml));
 
-        while (i < ml)
-        {
-            while(j < map[i].length)
-            {
-                if(i == heroPosy && j == heroPosx)
-                    stringBuilder.append("H");
-                else if(map[i][j])
-                    stringBuilder.append("X");
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (heroPosx == j && heroPosy == i)
+                    stringBuilder.append("! ");
+                else if (map[i][j])
+                    stringBuilder.append("* ");
                 else
-                    stringBuilder.append(".");
-                j++;
+                    stringBuilder.append(". ");
             }
             stringBuilder.append("\n");
-            i++;
         }
         mapPane.setText(stringBuilder.toString());
     }
