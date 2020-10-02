@@ -24,7 +24,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
     private JLabel charLabel;
     private JLabel loadLabel;
     private JButton loadButt;
-    private JButton delButt;
+    // private JButton delButt;
     private JButton backButt;
     private int i;
 
@@ -49,7 +49,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
         loadLabel = new JLabel("LOAD CHARACTER\n");
         charLabel = new JLabel("SELECT\n");
         loadButt = new JButton("Load");
-        delButt = new JButton("Delete");
+        // delButt = new JButton("Delete");
         backButt = new JButton("Back");
         i = 0;
         
@@ -76,7 +76,7 @@ public class GuiContinue extends JPanel implements ViewContinue {
         charSelect.setSelectedIndex(0);
         charPanel.add(charSelect);
         charPanel.add(loadButt);
-        charPanel.add(delButt);
+        // charPanel.add(delButt);
         charPanel.setVisible(true);
         this.add(charPanel, gbc);
         
@@ -93,12 +93,12 @@ public class GuiContinue extends JPanel implements ViewContinue {
             }
         });
 
-        delButt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                control.onClickDel(charSelect.getSelectedItem().toString());
-            }
-        });
+        // delButt.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         control.onClickDel(charSelect.getSelectedItem().toString());
+        //     }
+        // });
 
         backButt.addActionListener(new ActionListener() {
             @Override
@@ -109,21 +109,29 @@ public class GuiContinue extends JPanel implements ViewContinue {
         });
     }
 
-    @Override
-    public void loadChar() {
-        this.setVisible(false);
-        new GuiStart().run();
-    }
-
-    @Override
-    public void delChar() {
-        this.setVisible(false);
-        new GuiStart().run();
-    }
+    // @Override
+    // public void delChar() {
+    //     this.setVisible(false);
+    //     new GuiStart().run();
+    // }
 
     @Override
     public void retreat() {
         this.setVisible(false);
         new GuiStart().run();
+    }
+
+    @Override
+    public void invalidHero(String err) {
+
+        JOptionPane.showMessageDialog(App.getFrame(), err);
+        new GuiContinue().run();
+    }
+
+    @Override
+    public void startGame() {
+        
+        this.setVisible(false);
+        new GuiGame().run();
     }
 }

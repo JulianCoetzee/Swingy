@@ -131,6 +131,18 @@ public class Hero extends Entity {
         this.xp = xp;
     }
 
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public void setHelmet(Helmet helm) {
+        this.helm = helm;
+    }
+
+    public void setSword(Sword sword) {
+        this.sword = sword;
+    }
+
     public void equipArmor(Armor armor) {
         if (this.armor != null)
             this.def = this.def - this.armor.getStats();

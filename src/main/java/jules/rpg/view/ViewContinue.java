@@ -4,9 +4,9 @@ public interface ViewContinue {
 
     void run();
 
-    void loadChar();
+    void startGame();
 
-    void delChar();
+    void invalidHero(String err);
     
     void retreat();
 }

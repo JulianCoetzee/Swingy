@@ -30,6 +30,7 @@ public class GuiGame extends JPanel implements ViewGame {
 
     @Override
     public void run() {
+
         control = new GameControl(this);
 
         guiMake();
@@ -128,23 +129,23 @@ public class GuiGame extends JPanel implements ViewGame {
         int ml = map.length;
         int heroPosx = heroPos.getx();
         int heroPosy = heroPos.gety();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("MAP %dx%d\n", ml, ml));
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("MAP %dx%d\n", ml, ml));
 
         for (int i = 0; i < map.length; i++) 
         {
             for (int j = 0; j < map[i].length; j++) 
             {
                 if (heroPosx == j && heroPosy == i)
-                    stringBuilder.append("[H] ");
+                    sb.append("[H]");
                 else if (map[i][j])
-                    stringBuilder.append("[X] ");
+                    sb.append("[X]");
                 else
-                    stringBuilder.append("[ ] ");
+                    sb.append("[ ] ");
             }
-            stringBuilder.append("\n");
+            sb.append("\n");
         }
-        mapPane.setText(stringBuilder.toString());
+        mapPane.setText(sb.toString());
     }
 
     @Override

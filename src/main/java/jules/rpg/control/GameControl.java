@@ -62,8 +62,10 @@ public class GameControl {
         if (game.getMap()[y][x])
             encounterTime();
 
-        if (game.getHero().getHP() > 0);
+        if (game.getHero().getHP() > 0)
             view.updateMap(game);
+        else if (game.getHero().getHP() <= 0)
+            endGame("AbigFatL");
     }
 
     private void gainXP(int xp) {
@@ -82,6 +84,7 @@ public class GameControl {
         {
             int gains = game.getmapSize() * 100;
             view.showMsg("You win! You gained " + gains + "xp!");
+            gainXP(gains);
             save();
             view.endGameout();
         }
@@ -111,6 +114,7 @@ public class GameControl {
             gainXP(xp);
             game.getMap()[game.getHeroPos().gety()][game.getHeroPos().getx()] = false;
             setLootGear(enemy.getLoot());
+            view.updateMap(game);
         }
         else
             endGame("AbigFatL");
@@ -123,8 +127,9 @@ public class GameControl {
         Esc = ThreadLocalRandom.current().nextInt(0, 2);
         if (Esc == 1)
         {
-            view.showMsg("You have fled.\nyou retreat to you previous position");
+            view.showMsg("You have fled.\nYou retreat to your previous position");
             game.getHeroPos().setPos(current.getx(), current.gety());
+            view.updateMap(game);
         }
         else
         {

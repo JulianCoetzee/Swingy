@@ -27,6 +27,7 @@ public class NewGameControl {
             return ;
         }
         game.initGame(hero);
+        Save.saveMe(game.getHero());
         view.startNewGame();
     }
 
@@ -42,6 +43,7 @@ public class NewGameControl {
             return ;
         }
         game.initGame(hero);
+        Save.saveMe(game.getHero());
         view.startNewGame();
     }
 
