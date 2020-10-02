@@ -61,21 +61,28 @@ public class ConsoleNewGame implements ViewNewGame{
         else if (type.toLowerCase().equals("rogue"))
             control.onClickRogue(name);
         else
+        {
             System.out.println("Invalid command");
+            userInput();
+        }
     }
 
+    @Override
     public void startNewGame() {
+
         new ConsoleGame().run();
     }
 
     @Override
     public void invalidHero(String err) {
+
         System.out.println(err);
         new ConsoleNewGame().run();
     }
 
     @Override
     public void retreat() {
+
         new ConsoleStart().run();
     }
 }
