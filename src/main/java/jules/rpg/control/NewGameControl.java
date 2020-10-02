@@ -57,7 +57,7 @@ public class NewGameControl {
             return ;
         }
         game.initGame(hero);
-        hero.saveMe(hero);
+        Save.saveMe(game.getHero());
         view.startNewGame();
     }
 

@@ -1,5 +1,7 @@
 package jules.rpg.game.characters;
 
+import jules.rpg.game.gear.*;
+
 public class HeroForge {
 
     private String name;
@@ -9,6 +11,9 @@ public class HeroForge {
     private String type;
     private int lvl;
     private int xp;
+    private Armor armor;
+    private Helmet helm;
+    private Sword sword;
 
     public void setName(String name) {
         this.name = name;
@@ -38,7 +43,19 @@ public class HeroForge {
         this.xp = xp;
     }
 
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    
+    }
+    public void setHelmet(Helmet helm) {
+        this.helm = helm;
+    }
+
+    public void setSword(Sword sword) {
+        this.sword = sword;
+    }
+
     public Hero getHero() {
-        return new Hero(name, atk, def, hp, type, lvl, xp);
+        return new Hero(name, atk, def, hp, type, lvl, xp, armor, helm, sword);
     }
 }

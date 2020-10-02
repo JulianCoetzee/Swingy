@@ -16,21 +16,14 @@ public class GuiGame extends JPanel implements ViewGame {
 
     private GridBagLayout gbl;
     private GridBagConstraints gbc;
-    private JPanel titlePanel;
     // private JPanel mapPanel;
     private JEditorPane mapPane;
     private JEditorPane infoPane;
     private JScrollPane mapScroll;
-    private Game game;
-    private JPanel ctrlPanel;
-    private JLabel titleLabel;
-    private JLabel ctrlLabel;
     private JButton northButt;
     private JButton eastButt;
     private JButton southButt;
     private JButton westButt;
-    private JButton kickButt;
-    private JButton fleeButt;
     private JButton backButt;
 
     private GameControl control;
@@ -47,19 +40,13 @@ public class GuiGame extends JPanel implements ViewGame {
 
         gbl = new GridBagLayout();
         gbc = new GridBagConstraints();
-        titlePanel = new JPanel();
         // mapPanel = new JPanel();
-        ctrlPanel = new JPanel();
         mapPane = new JEditorPane();
         infoPane = new JEditorPane();
-        titleLabel = new JLabel("ADVENTURE TO THE EDGE");
-        ctrlLabel = new JLabel("CONTROLS");
         northButt = new JButton("North");
         eastButt = new JButton("East");
         southButt = new JButton("South");
         westButt = new JButton("West");
-        kickButt = new JButton("Fight");
-        fleeButt = new JButton("Flee");
         backButt = new JButton("Back");
 
         App.getFrame().setTitle("Adventure");
@@ -68,11 +55,6 @@ public class GuiGame extends JPanel implements ViewGame {
 
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        
-
-        // titlePanel.add(titleLabel);
-        // titlePanel.setVisible(true);
-        // this.add(titlePanel, gbc);
 
         infoPane.setEditable(false);
         infoPane.setText("Select Hero for more info");
@@ -88,12 +70,40 @@ public class GuiGame extends JPanel implements ViewGame {
         mapScroll.setPreferredSize(new Dimension(300, 300));
         mapScroll.setMinimumSize(new Dimension(200, 200));
 
+        this.add(northButt, gbc);
+        this.add(eastButt, gbc);
+        this.add(southButt, gbc);
+        this.add(westButt, gbc);
         this.add(backButt, gbc);
         this.setVisible(true);
         App.getFrame().setContentPane(this);
         App.getFrame().revalidate();
         App.showFrame();
 
+        northButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.moveMe("north");
+            }
+        });
+        eastButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.moveMe("east");
+            }
+        });
+        southButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.moveMe("south");
+            }
+        });
+        westButt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                control.moveMe("west");
+            }
+        });
         backButt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,26 +111,6 @@ public class GuiGame extends JPanel implements ViewGame {
             }
         });
     }
-
-    // @Override
-    // public void north() {
-
-    // }
-
-    // @Override
-    // public void east() {
-
-    // }
-
-    // @Override
-    // public void south() {
-
-    // }
-
-    // @Override
-    // public void west() {
-
-    // }
 
     @Override
     public void retreat() {
@@ -146,9 +136,7 @@ public class GuiGame extends JPanel implements ViewGame {
                 if(i == heroPosy && j == heroPosx)
                     stringBuilder.append("H");
                 else if(map[i][j])
-                {
                     stringBuilder.append("X");
-                }
                 else
                     stringBuilder.append(".");
                 j++;
@@ -170,21 +158,44 @@ public class GuiGame extends JPanel implements ViewGame {
     }
 
     @Override
-    public void endGame() {
-        // TODO Auto-generated method stub
+    public void endGameout() {
 
+        App.hideFrame();
+        App.getFrame().dispose();
     }
 
     @Override
     public void showMsg(String message) {
-        // TODO Auto-generated method stub
 
+        JOptionPane.showMessageDialog(App.getFrame(), message);
     }
 
     @Override
-    public void getVillian() {
-        // TODO Auto-generated method stub
+    public void encounterOption() {
 
+        Object options[] = {"Fight", "Flee"};
+
+        int result = JOptionPane.showOptionDialog(App.getFrame(),
+                "You encountered an enemy!",
+                "Fight or Flee?", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                
+        if (result == JOptionPane.YES_OPTION)
+            control.fightclub();
+        else
+            control.fleeclub();
     }
 
+    @Override
+    public boolean newGear(String loot) {
+
+        Object options[] = {"Equip", "Leave"};
+
+        int result = JOptionPane.showOptionDialog(App.getFrame(),
+                "Would you like to equip " + loot + "?",
+                "Equip or leave?", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        return result == JOptionPane.YES_OPTION;
+    }
 }

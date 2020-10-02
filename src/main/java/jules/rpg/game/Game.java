@@ -30,6 +30,7 @@ public class Game {
 
         setHero(hero);
         makeMap(hero);
+        seedEnemies();
         initHeroPos();
     }
  
@@ -56,7 +57,7 @@ public class Game {
         map[heroPos.getx()][heroPos.gety()] = false;
     }
 
-    private Equipment makeEquipment() {
+    private Equipment makeLoot() {
         
         int lootluck;
         int typeluck;
@@ -81,6 +82,59 @@ public class Game {
             loot = new Sword(blade[typeluck], ThreadLocalRandom.current().nextInt(1, 7 * (hero.getLvl() + 1)));
         }
         return loot;
+    }
+
+    public Enemy makeEnemy() {
+
+        String[] type = {"Goblin", "Orc", "Demon", "Kobold", "Werewolf"};
+        int atk;
+        int def;
+        int hp;
+        int typeSelect;
+        Equipment loot;
+
+        atk = ThreadLocalRandom.current().nextInt(hero.getAtk() - 15, hero.getAtk() + 2 * hero.getLvl());
+        def = ThreadLocalRandom.current().nextInt(hero.getDef() - 15, hero.getDef() + 2 * hero.getLvl());
+        hp = ThreadLocalRandom.current().nextInt(hero.getHP() - 30, hero.getHP() + 5 * hero.getLvl());
+        typeSelect = ThreadLocalRandom.current().nextInt(1, 6) - 1;
+        loot = makeLoot();
+
+        return new Enemy(type[typeSelect], atk, def, hp, loot);
+    }
+
+    private void seedEnemies() {
+        
+        int i;
+        int j;
+        int seed;
+        int mapLvl;
+        
+        i = 0;
+        j = 0;
+        mapLvl = hero.getLvl();
+        while (i < mapSize)
+        {
+            while (j < mapSize)
+            {
+                seed = ThreadLocalRandom.current().nextInt(0, 101);
+                if (seed <= (mapLvl + 1) * 10)
+                    map[i][j] = true;
+                j++;
+            }
+            i++;
+        }
+    }
+
+    public int encounter(Entity enemy) {
+
+        int xpgains;
+
+        xpgains = enemy.getAtk() + enemy.getDef() + enemy.getHP();
+
+        if (hero.fightMe(enemy))
+            return xpgains;
+        else
+            return (-1);
     }
 
     public Hero getHero() {

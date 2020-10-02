@@ -11,11 +11,13 @@ public interface ViewGame {
   
     void updateMap(Game game);
 
-    void endGame();
+    void encounterOption();
+
+    void endGameout();
 
     void showMsg(String message);
 
-    void getVillian();
+    boolean newGear(String loot);
 
     void retreat(); 
 }
